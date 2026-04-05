@@ -1,0 +1,3 @@
+{"created_at_ms":1775348512286,"session_id":"session-1775348512286-0","type":"session_meta","updated_at_ms":1775348518979,"version":1}
+{"message":{"blocks":[{"text":"hi","type":"text"}],"role":"user"},"type":"message"}
+{"message":{"blocks":[{"text":"Hello! How can I assist you today? Are you working on the Rust project in C:\\Users\\erikt\\Agentic\\claw-code-local\\rust?","type":"text"}],"role":"assistant","usage":{"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"input_tokens":0,"output_tokens":0}},"type":"message"}

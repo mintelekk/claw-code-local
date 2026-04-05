@@ -19,23 +19,19 @@ impl ProviderClient {
     }
 
     pub fn from_model_with_anthropic_auth(
-        model: &str,
-        anthropic_auth: Option<AuthSource>,
-    ) -> Result<Self, ApiError> {
-        let resolved_model = providers::resolve_model_alias(model);
-        match providers::detect_provider_kind(&resolved_model) {
-            ProviderKind::Anthropic => Ok(Self::Anthropic(match anthropic_auth {
-                Some(auth) => AnthropicClient::from_auth(auth),
-                None => AnthropicClient::from_env()?,
-            })),
-            ProviderKind::Xai => Ok(Self::Xai(OpenAiCompatClient::from_env(
-                OpenAiCompatConfig::xai(),
-            )?)),
-            ProviderKind::OpenAi => Ok(Self::OpenAi(OpenAiCompatClient::from_env(
-                OpenAiCompatConfig::openai(),
-            )?)),
-        }
-    }
+    model: &str,
+    anthropic_auth: Option<AuthSource>,
+) -> Result<Self, ApiError> {
+    let resolved_model = providers::resolve_model_alias(model);
+    Ok(Self::OpenAi(
+    OpenAiCompatClient::from_env(OpenAiCompatConfig {
+        provider_name: "ollama",
+        api_key_env: "OPENAI_API_KEY",
+        base_url_env: "OPENAI_BASE_URL",
+        default_base_url: "http://localhost:11434/v1",
+    })?
+))
+}
 
     #[must_use]
     pub const fn provider_kind(&self) -> ProviderKind {
